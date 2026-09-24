@@ -62,10 +62,10 @@ private:
 
     void decide() {
         std::cout << "[Agent] Decide: Using " << engine.getStrategyName() << "...\n";
-        auto [action, dcs, reason] = engine.evaluate(*currentEvent);
-        currentAction = std::move(action);
-        currentDCS = dcs;
-        currentReason = reason;
+        auto result = engine.evaluate(*currentEvent);
+        currentAction = std::move(std::get<0>(result));
+        currentDCS = std::get<1>(result);
+        currentReason = std::get<2>(result);
     }
 
     void execute() {

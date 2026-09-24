@@ -28,7 +28,9 @@ int main() {
         {"login_fail", "10.0.0.5"}
     };
 
-    for (const auto& [type, ip] : simulatedEvents) {
+    for (const auto& pair : simulatedEvents) {
+        std::string type = pair.first;
+        std::string ip = pair.second;
         auto event = EventFactory::createEvent(type, ip);
         if (event) {
             agent.processEvent(*event);
